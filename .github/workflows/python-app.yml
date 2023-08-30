@@ -39,12 +39,12 @@ jobs:
 
       - name: Push done work
         run: |
-          git config --global user.email "1390113493@qq.com"
-          git config --global user.name "huiiz"
+          # git config --global user.email "1390113493@qq.com"
+          # git config --global user.name "huiiz"
           # git commit --message 'Something cool'
           # git push
           git diff --exit-code || git commit -am "Automated deployment @ $(date '+%Y-%m-%d %H:%M:%S') ${{ env.TZ }}"
-          git push --force origin main
+          git push
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action， 这里包含部署到git pages上所需要的命令

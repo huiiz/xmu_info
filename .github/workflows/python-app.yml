@@ -17,6 +17,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TZ: "Asia/Shanghai"
 
     steps:
       - uses: actions/checkout@v3
@@ -37,8 +39,8 @@ jobs:
 
       - name: Push done work
         run: |
-          git diff --exit-code || git commit -am "Automated deployment @ $(date '+%Y-%m-%d %H:%M:%S') ${{ env.TZ }}"
-          git push --force origin main
+          git commit --message 'Something cool'
+          git push
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action， 这里包含部署到git pages上所需要的命令

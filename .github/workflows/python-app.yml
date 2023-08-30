@@ -41,6 +41,13 @@ jobs:
           folder: data
           token: "${{ secrets.SECRET }}"
 
+      - name: update
+        uses: JamesIves/github-pages-deploy-action@v4.2.3
+        with:
+          branch: main
+          folder: .
+          token: "${{ secrets.SECRET }}"
+
       # - name: Setup GIT user
       #   uses: fregante/setup-git-user@v2
 

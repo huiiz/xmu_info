@@ -1,3 +1,5 @@
+import random
+import time
 import requests
 from bs4 import BeautifulSoup
 from utils import get_info_data, get_md5s, init_files, save_info_data
@@ -17,12 +19,13 @@ category = get_category_data()
 
 
 def get_content(url):
-    html_data = requests.get(url)
-    site = "/".join(url.split("/")[:3])
-    html_data.encoding = html_data.apparent_encoding
-    html_text = html_data.text
-    soup = BeautifulSoup(html_text, 'html.parser')
+    time.sleep(random.random()) 
     try:
+        html_data = requests.get(url, timeout=3)
+        site = "/".join(url.split("/")[:3])
+        html_data.encoding = html_data.apparent_encoding
+        html_text = html_data.text
+        soup = BeautifulSoup(html_text, 'html.parser')
         if "xmu.edu.cn" not in url:
             raise Exception
         content = soup.find('div', class_='v_news_content')

@@ -5,49 +5,46 @@ name: Python application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   schedule:
-    - cron: '0 * * * *' #每小时执行一次
+    - cron: "0 * * * *" #每小时执行一次
 
 permissions:
   contents: read
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    - name: Start application
-      run: python get_info.py
+      - name: Start application
+        run: python get_info.py
 
-    
+      - name: Setup GIT user
+        uses: fregante/setup-git-user@v2
 
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action， 这里包含部署到git pages上所需要的命令
-      with:   # 不设置branch会默认将要部署的内容存于gh—pages branch Defaults to gh-pages.
-        FOLDER: data
-        CLEAN: true
+      - name: Push done work
+        run: |
+          git diff --exit-code || git commit -am "Automated deployment @ $(date '+%Y-%m-%d %H:%M:%S') ${{ env.TZ }}"
+          git push --force origin main
 
-    - name: Setup GIT user
-      uses: fregante/setup-git-user@v2
-
-    - name: Push done work
-      run: |
-        git diff --exit-code || git commit -am "Automated deployment @ $(date '+%Y-%m-%d %H:%M:%S') ${{ env.TZ }}"
-        git push --force origin main
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action， 这里包含部署到git pages上所需要的命令
+        with: # 不设置branch会默认将要部署的内容存于gh—pages branch Defaults to gh-pages.
+          FOLDER: data
+          CLEAN: true
 
     # - name: Lint with flake8
     #   run: |

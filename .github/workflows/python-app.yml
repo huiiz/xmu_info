@@ -39,6 +39,8 @@ jobs:
 
       - name: Push done work
         run: |
+          git config --global user.email "1390113493@qq.com"
+          git config --global user.name "huiiz"
           git commit --message 'Something cool'
           git push
 

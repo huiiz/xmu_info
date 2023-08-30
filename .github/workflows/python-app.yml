@@ -33,7 +33,7 @@ jobs:
         run: python get_info.py
 
       - name: Setup GIT user
-        uses: fregante/setup-git-user@v2
+        uses: fregante/setup-git-user@v2.0.1
 
       - name: Push done work
         run: |

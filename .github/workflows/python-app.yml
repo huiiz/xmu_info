@@ -34,20 +34,27 @@ jobs:
       - name: Start application
         run: python get_info.py
 
-      - name: Setup GIT user
-        uses: fregante/setup-git-user@v2.0.1
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.3
+        with:
+          branch: gh-pages
+          folder: data
+          token: "${{ secrets.SECRET }}"
 
-      - name: Push done work
-        run: |
-          git add .  
-          git commit -m "Updated repository content"  
-          git push origin main
+      # - name: Setup GIT user
+      #   uses: fregante/setup-git-user@v2
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action， 这里包含部署到git pages上所需要的命令
-        with: # 不设置branch会默认将要部署的内容存于gh—pages branch Defaults to gh-pages.
-          FOLDER: data
-          CLEAN: true
+      # - name: Push done work
+      #   run: |
+      #     git add .
+      #     git commit -m "Updated repository content"
+      #     git push origin main
+
+      # - name: Deploy
+      #   uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action， 这里包含部署到git pages上所需要的命令
+      #   with: # 不设置branch会默认将要部署的内容存于gh—pages branch Defaults to gh-pages.
+      #     FOLDER: data
+      #     CLEAN: true
 
     # - name: Lint with flake8
     #   run: |

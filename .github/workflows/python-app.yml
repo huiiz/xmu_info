@@ -42,7 +42,7 @@ jobs:
         CLEAN: true
 
     - name: Setup GIT user
-      uses: fregante/setup-git-user@v1
+      uses: fregante/setup-git-user@v2
 
     - name: Push done work
       run: |

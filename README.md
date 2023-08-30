@@ -1,1 +1,0 @@
-# xmu_info

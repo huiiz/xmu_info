@@ -9,7 +9,7 @@ on:
   pull_request:
     branches: ["main"]
   schedule:
-    - cron: "0 * * * *" #每小时执行一次
+    - cron: "30 8,11,15,18 * * *"
 
 permissions:
   contents: read
